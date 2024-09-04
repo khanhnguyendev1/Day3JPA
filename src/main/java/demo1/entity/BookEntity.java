@@ -1,4 +1,4 @@
-package com.ivt.spring.jpa.demo1.entity;
+package demo1.entity;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

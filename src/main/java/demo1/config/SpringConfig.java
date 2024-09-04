@@ -1,4 +1,4 @@
-package com.ivt.spring.jpa.demo1.config;
+package demo1.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +15,14 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableJpaRepositories (basePackages = "com.ivt.spring.jpa.demo1.repository")
+@EnableJpaRepositories (basePackages = "demo1")
 @EnableTransactionManagement
 public class SpringConfig {
     @Bean
     DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/jpa2?characterEncoding=UTF-8&createDatabaseIfNotExist=true");
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/jpa3?characterEncoding=UTF-8&createDatabaseIfNotExist=true");
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         return dataSource;
@@ -33,10 +33,10 @@ public class SpringConfig {
         LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
         entityManager.setDataSource(dataSource);
         entityManager.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManager.setPackagesToScan("com.ivt.spring.jpa.demo1.entity");
+        entityManager.setPackagesToScan("demo1");
         Properties jpaProperties = new Properties();
-        jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        jpaProperties.setProperty("hibernate.hbm2ddl.auto","create");
+        jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
+        jpaProperties.setProperty("hibernate.hbm2ddl.auto","update");//create
         jpaProperties.setProperty("hibernate.show_sql", "true");
         jpaProperties.setProperty("hibernate.format_sql", "true");
         entityManager.setJpaProperties(jpaProperties);
